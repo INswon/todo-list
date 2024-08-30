@@ -10,10 +10,12 @@ function addMemo(){
 
     //タイトルとメモの両方が入力されているか確認
     if(titleInput && memoInput){
-    //メモをリストに追加
-        memos.push({title:titleInput, content: memoInput});
+        //日時を取得
+        const currentDateTime = new Date().toLocaleString();
+        //メモをリストに追加
+        memos.push({title:titleInput, content: memoInput, date:currentDateTime});
 
-    //入力フィールドをクリア
+        //入力フィールドをクリア
         document.getElementById('titleInput').value = '';
         document.getElementById('memoInput').value = '';
         updateTitleList();
@@ -43,21 +45,20 @@ function updateTitleList() {
 
 // メモ内容を表示する関数
 function updateTitleList() {
-    const titleList = document.getElementById('titleList'); // ID を修正
+    //メモリストを表示する場所(HTML要素)を取得する
+    const titleList = document.getElementById('titleList'); 
+    //メモの内容を一度空にする
     titleList.innerHTML = '';
-    
-    memos.forEach((memo, index) => {
-        const titleElement = document.createElement('div');
-        titleElement.textContent = memo.title;
-        titleElement.style.cursor = 'pointer';
-        titleElement.classList.add('list-group-item');
-        titleElement.onclick = () => {
-            console.log('Clicked index:', index);
-            displayMemoContent(index);
-        };
-        console.log('Created title element:', titleElement);
-        titleList.appendChild(titleElement);
+
+    //保存された全てのメモに対して、一つずつ処理を行います。
+    memos.forEach((memo) => {
+        //各メモを表示するための新しいHTML要素を作成します。
+        //ここでの処理は、新しいメモのHTML要素を作成し、それをリストに追加することです。
+        //この<div>が、各メモのタイトル、内容、日時を表示するための枠になります。
+        const memoElement = document.createElement('div');
+        memoElement.textContent = `${memo.title} - ${memo.content} - ${memo.date}`; // タイトル、内容、日時を一行で表示
+
+        memoElement.classList.add('list-group-item'); // Bootstrapのスタイルを適用
+        titleList.appendChild(memoElement); // リストに追加
     });
-    
-    console.log('Updated titleList:', titleList.children);
 }
