@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>メモアプリ</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="style.css" rel="stylesheet"> <!-- 独自のスタイルシート -->
+</head>
+<body>
+    <div class="container d-flex flex-column justify-content-center align-items-center" style="width: 800px;">
+        <h1 class="text-center">メモアプリ</h1>
+
+        
+        <div class="title">Title</div>
+        <div class="content1">
+            <input type="text" class="form-control mr-2" id="titleInput" placeholder="タイトルを入力">
+            <button class="btn btn-secondary" onclick="findTitle()">find</button>
+        </div>
+
+        <div class="content">Memo</div>
+        <div class="content2 mt-1">
+            <input type="text" class="form-control" id="memoInput" placeholder="メモを入力">
+        </div>
+
+        <div class="button-layout">
+            <button class="btn btn-primary " onclick="addMemo()">save</button>
+            <button class="btn btn-danger" onclick="deleteMemo()">delete</button>
+        </div>
+
+        <div id="titleList" class="mt-3"></div>
+    </div>
+    <!-- Bootstrap JSとその依存ライブラリ (CDN) -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>

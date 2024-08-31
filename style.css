@@ -1,0 +1,24 @@
+.text-center{
+    margin-top: 50px;
+}
+
+.title {
+    margin-bottom: 10px; /* .titleの直後にある.contentにマージンを追加 */
+}
+
+ .content{
+    margin-bottom: 10px; 
+ }
+
+
+ .content1{
+    display: flex;
+    margin-bottom: 10px;
+ }
+
+ .button-layout{
+    margin-top: 20px;
+    display: flex;
+    gap: 10px;
+ }
+

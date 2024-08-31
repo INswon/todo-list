@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 // 初期化処理: ページ読み込み時にローカルストレージからメモを読み込む
 document.addEventListener('DOMContentLoaded', () => {
     memos = JSON.parse(localStorage.getItem('memos')) || [];
@@ -21,6 +22,24 @@ function addMemo() {
 
         // ローカルストレージに保存
         localStorage.setItem('memos', JSON.stringify(memos));
+=======
+// メモを保存するための空のリスト
+const memos = [];
+let selectedIndex = null; // 現在選択されているメモのインデックスを保存する変数
+
+function addMemo() {
+    // タイトルの入力値を取得
+    const titleInput = document.getElementById('titleInput').value;
+    // メモをリストに追加
+    const memoInput = document.getElementById('memoInput').value;
+
+    // タイトルとメモの両方が入力されているか確認
+    if (titleInput && memoInput) {
+        // 日時を取得
+        const currentDateTime = new Date().toLocaleString();
+        // メモをリストに追加
+        memos.push({ title: titleInput, content: memoInput, date: currentDateTime });
+>>>>>>> b5e406f1ce46cdd32d48ef0930d2660a550d414a
 
         // 入力フィールドをクリア
         document.getElementById('titleInput').value = '';
@@ -37,11 +56,16 @@ function updateTitleList() {
     // メモの内容を一度空にする
     titleList.innerHTML = '';
 
+<<<<<<< HEAD
     // ローカルストレージからメモを取得
     const storedMemos = JSON.parse(localStorage.getItem('memos')) || [];
     console.log('Memos to Display:', storedMemos);
 
     storedMemos.forEach((memo, index) => {
+=======
+    // 保存された全てのメモに対して、一つずつ処理を行います。
+    memos.forEach((memo, index) => {
+>>>>>>> b5e406f1ce46cdd32d48ef0930d2660a550d414a
         const memoElement = document.createElement('div');
         memoElement.textContent = `${memo.title} - ${memo.content} - ${memo.date}`; // タイトル、内容、日時を一行で表示
 
@@ -59,10 +83,16 @@ function updateTitleList() {
 
 function deleteMemo() {
     if (selectedIndex !== null) {
+<<<<<<< HEAD
         memos.splice(selectedIndex, 1);
         selectedIndex = null;
         localStorage.setItem('memos', JSON.stringify(memos));
         updateTitleList();
+=======
+        memos.splice(selectedIndex, 1); // 選択されたインデックスのメモを削除
+        selectedIndex = null; // インデックスをリセット
+        updateTitleList(); // リストを更新して画面に反映
+>>>>>>> b5e406f1ce46cdd32d48ef0930d2660a550d414a
     } else {
         alert('削除するメモを選択してください。');
     }
