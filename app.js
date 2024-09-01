@@ -9,6 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
 let memos = []; // グローバルなメモ配列
 let selectedIndex = null; // 現在選択されているメモのインデックスを保存する変数
 
+
 function addMemo() {
     // タイトルの入力値を取得
     const titleInput = document.getElementById('titleInput').value;
@@ -44,8 +45,8 @@ function updateTitleList() {
 
     // ローカルストレージからメモを取得
     const storedMemos = JSON.parse(localStorage.getItem('memos')) || [];
-    console.log('Memos to Display:', storedMemos);
 
+    //各メモをリストに追加するループ
     storedMemos.forEach((memo, index) => {
         const memoElement = document.createElement('div');
         memoElement.textContent = `${memo.title} - ${memo.content} - ${memo.date}`; // タイトル、内容、日時を一行で表示
@@ -70,6 +71,37 @@ function deleteMemo() {
         updateTitleList();
     } else {
         alert('削除するメモを選択してください。');
+    }
+}
+
+function openEditModal() {
+    if (selectedIndex !== null) {
+        const memo = memos[selectedIndex];
+        document.getElementById('editTitleInput').value = memo.title;
+        document.getElementById('editMemoInput').value = memo.content;
+        $('#editModal').modal('show');
+    } else {
+        alert('編集するメモを選択してください。');
+    }
+}
+
+function saveEdit() {
+    if (selectedIndex !== null) {
+        const editedTitle = document.getElementById('editTitleInput').value;
+        const editedContent = document.getElementById('editMemoInput').value;
+
+        if (editedTitle && editedContent) {
+            memos[selectedIndex] = {
+                ...memos[selectedIndex],
+                title: editedTitle,
+                content: editedContent
+            };
+            localStorage.setItem('memos', JSON.stringify(memos));
+            updateTitleList();
+            $('#editModal').modal('hide');
+        } else {
+            alert('タイトルとメモを入力してください。');
+        }
     }
 }
 
